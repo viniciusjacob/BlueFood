@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>BlueFood</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+
+        <div class="container w-100">
+            <form class="form-signin" method="POST" th:action="@{/public/cliente/save}" th:object="${cliente}">
+                <div class="alert alert-primary my-3" role="alert" th:if="${msg != null}">
+                    <span th:text="${msg}"></span>
+                </div>
+                <h1 class="h3 mb-3 font-weight-normal">Cadastro de Restaurante</h1>
+                <input type="hidden" th:field="*{id}" />
+                <label for="inputEmail" class="sr-only">Nome</label>
+                <input type="text" class="form-control my-1" placeholder="Nome" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid' : ''" autofocus>
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}">
+                    <span th:errors="*{nome}"></span>
+                </div>
+
+                <label for="inputCpf" class="sr-only">Cpf</label>
+                <input type="text" class="form-control my-1" placeholder="Cpf" th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid' : ''">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cpf')}">
+                    <span th:errors="*{cpf}"></span>
+                </div>
+
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="text" class="form-control my-1" placeholder="Email" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}">
+                    <span th:errors="*{email}"></span>
+                </div>
+
+                <label for="inputTelefone" class="sr-only">Telefone</label>
+                <input type="text" class="form-control my-1" placeholder="Telefone" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid' : ''">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('telefone')}">
+                    <span th:errors="*{telefone}"></span>
+                </div>
+
+                <label for="inputCep" class="sr-only">Cep</label>
+                <input type="text" class="form-control my-1" placeholder="Cep" th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? 'is-invalid' : ''">
+                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cep')}">
+                    <span th:errors="*{cep}"></span>
+                </div>
+
+                <div th:id="${!editMode}">
+                    <label for="inputSenha" class="sr-only">Senha</label>
+                    <input type="password" class="form-control my-1" placeholder="Senha" th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? 'is-invalid' : ''">
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('senha')}">
+                        <span th:errors="*{senha}"></span>
+                    </div>
+                </div>
+                <input type="hidden" th:field="*{senha}" th:if="${editMode}"/>
+
+                <input type="submit" class="btn btn-primary btn-block my-3" th:value="${!editMode} ? Salvar : Editar" />
+                <a class="btn btn-danger" th:href="@{/}">Cancelar</a>
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>
